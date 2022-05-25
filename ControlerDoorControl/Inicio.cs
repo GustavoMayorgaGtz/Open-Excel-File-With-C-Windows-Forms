@@ -53,6 +53,8 @@ namespace ControlerDoorControl
             /**************************************************************************/
             try
             {
+                Names.Clear();
+                TagUsers.Clear();
                 OpenFileDialog openFile = new OpenFileDialog();
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
@@ -65,24 +67,60 @@ namespace ControlerDoorControl
                     var cells = sl.GetCells();
                     int cellsLenght = cells.Count;
 
-                    Console.WriteLine("Celdas");
-                    Console.WriteLine(cells.Count);
-
-                    lbl_excel_response.Text = cells.Count.ToString();
                     int valor = 1;
-                    Console.WriteLine("Comenzando....");
                     while (valor <= cellsLenght)
                     {
                         if (!string.IsNullOrEmpty(sl.GetCellValueAsString(valor, 1)))
                         {
-                            Console.WriteLine(sl.GetCellValueAsString(valor, 1));
-                            Console.WriteLine(sl.GetCellValueAsString(valor, 2));
                             Names.Add(sl.GetCellValueAsString(valor, 1));
                             TagUsers.Add(sl.GetCellValueAsString(valor, 2));
                         }
                         valor++;
                     }
-                    dataGridView1.Columns.Add("Control", "No. Control");
+                    /******Check if Names and TagUsers Lists contains a correctly data ******/
+                    if (cellsLenght > 0 && (Names[0].Contains("Alumno") || Names[0].Contains("Nombre")) && (TagUsers[0].Contains("Numero")|| TagUsers[0].Contains("Control")))
+                    {
+                        MessageBox.Show("Si tiene datos correctos");
+                        setValue.Enabled = true;
+                        setValue.Visible = Visible;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe la tabla Alumno o la tabla Control");
+                        setValue.Enabled = false;
+                        setValue.Visible =  false;
+                    }
+                    /*******insert column and data in dataGridView1**********/
+                    int countColumn = dataGridView1.Columns.Count;
+                  
+                    if (countColumn == 2)
+                    {
+                        dataGridView1.Rows.Clear();
+                        dataGridView1.Columns.Clear();
+                        dataGridView1.Columns.Add("Nombres_Registrados", "Nombre");
+                        dataGridView1.Columns.Add("Control", "No. Control");
+                        DataGridViewColumn column1 = dataGridView1.Columns[0];
+                        column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        DataGridViewColumn column2 = dataGridView1.Columns[1];
+                        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    }
+                    if (countColumn == 0)
+                    {
+                        dataGridView1.Columns.Add("Nombres_Registrados", "Nombre");
+                        dataGridView1.Columns.Add("Control", "No. Control");
+                        DataGridViewColumn column1 = dataGridView1.Columns[0];
+                        column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        DataGridViewColumn column2 = dataGridView1.Columns[1];
+                        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    }
+                    if (countColumn == 1)
+                    {
+                        dataGridView1.Columns.Add("Control", "No. Control");
+                        DataGridViewColumn column2 = dataGridView1.Columns[1];
+                        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    }
+
+                   
                     foreach (string item in Names)
                     {
 
@@ -92,6 +130,7 @@ namespace ControlerDoorControl
                     foreach (var item in TagUsers)
                     {
                         dataGridView1.Rows[iterator].Cells["Control"].Value = item;
+                        
                         iterator++;
                     }
                 }
