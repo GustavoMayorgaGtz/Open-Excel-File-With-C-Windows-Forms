@@ -80,13 +80,13 @@ namespace ControlerDoorControl
                     /******Check if Names and TagUsers Lists contains a correctly data ******/
                     if (cellsLenght > 0 && (Names[0].Contains("Alumno") || Names[0].Contains("Nombre")) && (TagUsers[0].Contains("Numero")|| TagUsers[0].Contains("Control")))
                     {
-                        MessageBox.Show("Si tiene datos correctos");
+                        MessageBox.Show("Formato Correcto");
                         setValue.Enabled = true;
                         setValue.Visible = Visible;
                     }
                     else
                     {
-                        MessageBox.Show("No existe la tabla Alumno o la tabla Control");
+                        MessageBox.Show("No existe la tabla Alumno o la tabla Control || El formato no es correcto");
                         setValue.Enabled = false;
                         setValue.Visible =  false;
                     }
@@ -123,7 +123,6 @@ namespace ControlerDoorControl
                    
                     foreach (string item in Names)
                     {
-
                         dataGridView1.Rows.Add(item);
                     }
                     int iterator = 0;
@@ -147,5 +146,21 @@ namespace ControlerDoorControl
                 MessageBox.Show("Error: " + err.Message);
             }
         }
+
+        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ayuda ayuda = new Ayuda();
+            ayuda.Show();
+            this.Close();
+        }
+
+        private void sintaxisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sintaxis sintaxis = new Sintaxis();
+            sintaxis.Show();
+            this.Close();
+
+        }
+      
     }
 }

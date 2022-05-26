@@ -23,3 +23,5 @@ C:\Users\End User\source\repos\ControlerDoorControl\ControlerDoorControl\bin\Deb
 C:\Users\End User\source\repos\ControlerDoorControl\ControlerDoorControl\bin\Debug\DocumentFormat.OpenXml.xml
 C:\Users\End User\source\repos\ControlerDoorControl\ControlerDoorControl\bin\Debug\SpreadsheetLight.xml
 C:\Users\End User\source\repos\ControlerDoorControl\ControlerDoorControl\bin\Debug\System.IO.Packaging.xml
+C:\Users\End User\source\repos\ControlerDoorControl\ControlerDoorControl\obj\Debug\ControlerDoorControl.Sintaxis.resources
+C:\Users\End User\source\repos\ControlerDoorControl\ControlerDoorControl\obj\Debug\ControlerDoorControl.Ayuda.resources
